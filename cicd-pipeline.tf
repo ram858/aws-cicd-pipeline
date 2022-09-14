@@ -36,7 +36,7 @@ resource "aws_codebuild_project" "tf-apply" {
     compute_type                = "BUILD_GENERAL1_SMALL"
     image                       = "aws/codebuild/standard:6.0"
     type                        = "LINUX_CONTAINER"
-    image_pull_credentials_type = "CODEBUILD"
+    image_pull_credentials_type = "SERVICE_ROLE"
     registry_credential{
         credential = var.dockerhub_credentials
         credential_provider = "SECRETS_MANAGER"
