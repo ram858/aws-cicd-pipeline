@@ -1,11 +1,22 @@
 version: 0.2
+
 phases:
+
+  install:
+    commands:
+      - "apt install unzip -y"
+      - "wget https://releases.hashicorp.com/terraform/0.11.14/terraform_0.11.14_linux_amd64.zip"
+      - "unzip terraform_0.11.14_linux_amd64.zip"
+      - "mv terraform /usr/local/bin/"
   pre_build:
     commands:
-      - docker run -i -t hashicorp/terraform
       - terraform init
       - terraform validate
-  
+
   build:
     commands:
       - terraform plan
+
+  post_build:
+    commands:
+      - echo terraform plan completed on `date`
