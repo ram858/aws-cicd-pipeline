@@ -34,9 +34,9 @@ resource "aws_codebuild_project" "tf-apply" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "hashicorp/terraform"
+    image                       = "aws/codebuild/standard:6.0"
     type                        = "LINUX_CONTAINER"
-    image_pull_credentials_type = "SERVICE_ROLE"
+    image_pull_credentials_type = "CODEBUILD"
     registry_credential{
         credential = var.dockerhub_credentials
         credential_provider = "SECRETS_MANAGER"
