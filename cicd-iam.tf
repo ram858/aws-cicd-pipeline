@@ -70,13 +70,13 @@ EOF
 
 data "aws_iam_policy_document" "tf-cicd-build-policies" {
     statement {
-        sid = "1"
+        sid = ""
         actions = [
           "logs:*",
           "s3:*",
           "codebuild:*",
           "secretsmanager:*",
-          "iam:*"
+          "iam:*",
           ]
         resources = ["*"]
         effect = "Allow"
