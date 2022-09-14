@@ -11,11 +11,11 @@ resource "aws_codebuild_project" "tf-plan" {
     compute_type                = "BUILD_GENERAL1_SMALL"
     image                       = "aws/codebuild/standard:6.0"
     type                        = "LINUX_CONTAINER"
-    image_pull_credentials_type = "SERVICE_ROLE"
-    registry_credential{
-        credential = var.dockerhub_credentials
-        credential_provider = "SECRETS_MANAGER"
-    }
+    image_pull_credentials_type = "CODEBUILD"
+    # registry_credential{
+    #     credential = var.dockerhub_credentials
+    #     credential_provider = "SECRETS_MANAGER"
+    # }
  }
  source {
      type   = "CODEPIPELINE"
@@ -70,7 +70,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
             output_artifacts = ["tf-code"]
             configuration = {
                 FullRepositoryId = "ram858/aws-cicd-pipeline"
-                BranchName   = "master"
+                BranchName   = "main"
                 ConnectionArn = var.codestar_connector_credentials
                 OutputArtifactFormat = "CODE_ZIP"
             }

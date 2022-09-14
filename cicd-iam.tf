@@ -38,7 +38,7 @@ resource "aws_iam_policy" "tf-cicd-pipeline-policy" {
     name = "tf-cicd-pipeline-policy"
     path = "/"
     description = "Pipeline policy"
-    policy = data.aws_iam_policy_document.tf-cicd-pipeline-policies.json
+    policy = data.aws_iam_policy_document.tf-cicd-build-policies.json
 }
 
 resource "aws_iam_role_policy_attachment" "tf-cicd-pipeline-attachment" {
@@ -69,9 +69,15 @@ EOF
 }
 
 data "aws_iam_policy_document" "tf-cicd-build-policies" {
-    statement{
-        sid = ""
-        actions = ["logs:*", "s3:*", "codebuild:*", "secretsmanager:*","iam:*"]
+    statement {
+        sid = "1"
+        actions = [
+          "logs:*",
+          "s3:*",
+          "codebuild:*",
+          "secretsmanager:*",
+          "iam:*"
+          ]
         resources = ["*"]
         effect = "Allow"
     }
