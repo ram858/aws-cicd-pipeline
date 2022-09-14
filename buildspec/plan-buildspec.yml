@@ -2,6 +2,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - docker run -i -t hashicorp/terraform
       - terraform init
       - terraform validate
   
